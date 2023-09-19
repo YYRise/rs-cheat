@@ -1,5 +1,8 @@
 mod str_usage;
+mod internal;
+
 use docopt::Docopt;
+use crate::internal::config::Config;
 
 fn main() {
     println!("Hello, world!");
@@ -10,4 +13,7 @@ fn main() {
         .unwrap_or_else(|e| e.exit());
     println!("{:?}", args);
     println!("  init: {}, {}", args.get_str("--init"), args.get_bool("--init"));
+    let conf_path = String::from("conf/conf.yml");
+    let conf = Config::new(conf_path.as_str(), false).unwrap();
+    println!("{:?}", conf);
 }
